@@ -11,9 +11,9 @@ class QuestionController extends BaseController
 {
     public function getRandomQuestion() {
         try {
-            $questions1=Question::where('question_level','easy')->inRandomOrder()->take(3)->get();
-            $questions2=Question::where('question_level','medium')->inRandomOrder()->take(3)->get();
-            $questions3=Question::where('question_level','hard')->inRandomOrder()->take(3)->get();
+            $questions1=Question::where('question_level','easy')->inRandomOrder()->take(6)->get();
+            $questions2=Question::where('question_level','medium')->inRandomOrder()->take(6)->get();
+            $questions3=Question::where('question_level','hard')->inRandomOrder()->take(5)->get();
             $questions=$questions1->merge($questions2)->merge($questions3);
             return $this->SendResponse($questions, 'Questions is retrieved successfully');
         } catch (\Exception $th) {
