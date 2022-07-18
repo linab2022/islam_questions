@@ -31,3 +31,5 @@ Route::post('createPlayerAccount/{id}', 'API\PlayerAccountController@createPlaye
 Route::post('store', 'API\QuestionController@store');
 Route::post('getRandomQuestion', 'API\QuestionController@getRandomQuestion');
 
+Route::post('register', 'API\AuthController@register');
+Route::post('login', 'API\AuthController@login');
