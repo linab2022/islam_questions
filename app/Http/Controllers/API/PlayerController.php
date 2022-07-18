@@ -115,7 +115,7 @@ class PlayerController extends BaseController
             $leaderboard= DB::table('players')
                 ->select('id','player_name','player_score')
                 ->orderByDesc('player_score')
-                ->orderBy('id')->take(10)->get();
+                ->orderBy('id')->take(100)->get();
             foreach($leaderboard as $p)
             {    
                 if (is_null($p->player_name))

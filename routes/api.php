@@ -27,3 +27,7 @@ Route::post('getPlayerScore/{id}', 'API\PlayerController@getPlayerScore');
 Route::post('getLeaderboard', 'API\PlayerController@getLeaderboard');
 
 Route::post('createPlayerAccount/{id}', 'API\PlayerAccountController@createPlayerAccount');
+
+Route::post('store', 'API\QuestionController@store');
+Route::post('getRandomQuestion', 'API\QuestionController@getRandomQuestion');
+
