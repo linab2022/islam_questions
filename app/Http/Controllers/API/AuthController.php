@@ -35,7 +35,7 @@ class AuthController extends BaseController
         try {    
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
                 $user = Auth::user();		    
-                $success['user_name'] = $user->userName;
+                $success['user_name'] = $user->user_name;
                 $success['email'] = $user->email;
                 return $this->SendResponse($success, 'User is logged in successfully');
             }else{
