@@ -18,18 +18,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('createNewPlayer', 'API\PlayerController@createNewPlayer');
-Route::post('getPlayerName/{id}', 'API\PlayerController@getPlayerName');
+Route::get('createNewPlayer', 'API\PlayerController@createNewPlayer');
+Route::get('getPlayerName/{id}', 'API\PlayerController@getPlayerName');
 Route::post('updatePlayerName/{id}', 'API\PlayerController@updatePlayerName');
-Route::post('isRegistered/{id}', 'API\PlayerController@isRegistered');
+Route::get('isRegistered/{id}', 'API\PlayerController@isRegistered');
 Route::post('increaseScore/{id}', 'API\PlayerController@increaseScore');
-Route::post('getPlayerScore/{id}', 'API\PlayerController@getPlayerScore');
-Route::post('getLeaderboard', 'API\PlayerController@getLeaderboard');
+Route::get('getPlayerScore/{id}', 'API\PlayerController@getPlayerScore');
+Route::get('getLeaderboard', 'API\PlayerController@getLeaderboard');
 
 Route::post('createPlayerAccount/{id}', 'API\PlayerAccountController@createPlayerAccount');
 
 Route::post('store', 'API\QuestionController@store');
-Route::post('getRandomQuestion', 'API\QuestionController@getRandomQuestion');
+Route::get('getRandomQuestion', 'API\QuestionController@getRandomQuestion');
 
 Route::post('register', 'API\AuthController@register');
 Route::post('login', 'API\AuthController@login');
