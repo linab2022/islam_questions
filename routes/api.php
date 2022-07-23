@@ -22,11 +22,13 @@ Route::get('createNewPlayer', 'API\PlayerController@createNewPlayer');
 Route::get('getPlayerName/{id}', 'API\PlayerController@getPlayerName');
 Route::post('updatePlayerName/{id}', 'API\PlayerController@updatePlayerName');
 Route::get('isRegistered/{id}', 'API\PlayerController@isRegistered');
+Route::post('createNewPlayerWithAccount', 'API\PlayerController@createNewPlayerWithAccount');
 Route::post('increaseScore/{id}', 'API\PlayerController@increaseScore');
 Route::get('getPlayerScore/{id}', 'API\PlayerController@getPlayerScore');
 Route::get('getLeaderboard', 'API\PlayerController@getLeaderboard');
 
 Route::post('createPlayerAccount/{id}', 'API\PlayerAccountController@createPlayerAccount');
+
 
 Route::post('store', 'API\QuestionController@store');
 Route::get('getRandomQuestion', 'API\QuestionController@getRandomQuestion');

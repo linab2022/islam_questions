@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use App\Models\Player;
+use App\Models\PlayerAccount;
 use Illuminate\Support\Facades\DB;
 
 class PlayerController extends BaseController
@@ -69,6 +71,28 @@ class PlayerController extends BaseController
                 else
                     return $this->SendResponse(['status'=>'Player is registered'], 'Player status');
             }
+        } catch (\Exception $th) {
+            return $this->SendError('Error',$th->getMessage());
+        } 
+    }
+
+    public function createNewPlayerWithAccount(Request $request) {
+        try {
+            $input = $request->all();
+            $validator = Validator::make($input, [
+                'player_name' => 'required',
+                'player_email' => 'required|unique:player_accounts,player_email| email',
+                'email_type' => ['required',Rule::in(['facebook','gmail'])]
+            ,]);
+
+            if ($validator->fails())
+                return $this->SendError('Validate Error', $validator->errors());            
+            
+            $player = Player::create(['player_name' => $input['player_name']]);
+            $player->player_account=PlayerAccount::Create(
+                ['player_email' => $input['player_email'],'email_type' => $input['email_type'], 'player_id' => $player->id]
+            );
+            return $this->SendResponse($player, 'Player is created successfully');
         } catch (\Exception $th) {
             return $this->SendError('Error',$th->getMessage());
         } 

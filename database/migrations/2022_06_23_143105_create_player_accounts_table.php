@@ -15,7 +15,7 @@ class CreateplayerAccountsTable extends Migration
     {
         Schema::create('player_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('player_email');
+            $table->string('player_email')->unique();
             $table->enum('email_type',['facebook','gmail']);
             $table->unsignedBigInteger('player_id');
             $table->foreign('player_id')

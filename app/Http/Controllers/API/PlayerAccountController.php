@@ -14,7 +14,7 @@ class PlayerAccountController extends BaseController
         try {
             $input = $request->all();
             $validator = Validator::make($input, [
-                'player_email' => 'required|email',
+                'player_email' => 'required|unique:player_accounts,player_email|email',
                 'email_type' => ['required',Rule::in(['facebook','gmail'])]
             ,]);
 
