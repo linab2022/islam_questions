@@ -95,13 +95,13 @@ class PlayerController extends BaseController
                 if (Str::contains($validator->errors(), 'The player email has already been taken'))  
                 {
                     $player_account=PlayerAccount::where('player_email', $input['player_email'])->first();
-                    $player=Player::find($player_account->id);
+                    $player=Player::find($player_account->player_id);
                     if (is_null($player->player_name))
                         $player_name='المتسابق رقم '.$player->id;
                     else
                         $player_name=$player->player_name;
                     return $this->SendResponse(['player_name' => $player_name,
-                                                'id' => $player_account->id,
+                                                'id' => $player_account->player_id,
                                                 'player_account' => $player_account], 'Player is retrieved successfully');
                 }  
                 else
