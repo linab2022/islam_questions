@@ -67,9 +67,14 @@ class PlayerController extends BaseController
             else
             {
                 if (is_null($player->player_account)) 
-                    return $this->SendResponse(['status'=>'Player is not registered'], 'Player status');
+                    return $this->SendResponse(['status'=>'not registered'], 'Player is not registered');
                 else
-                    return $this->SendResponse(['status'=>'Player is registered'], 'Player status');
+                {
+                    return $this->SendResponse(['player_email'=>$player->player_account->player_email,
+                                                'email_type'=>$player->player_account->email_type,
+                                                'status'=>'registered'], 'Player is registered');
+                }
+                    
             }
         } catch (\Exception $th) {
             return $this->SendError('Error',$th->getMessage());
