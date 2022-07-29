@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Models\Player;
 use App\Models\PlayerAccount;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PlayerController extends BaseController
 {
@@ -91,7 +92,20 @@ class PlayerController extends BaseController
             ,]);
 
             if ($validator->fails())
-                return $this->SendError('Validate Error', $validator->errors());            
+                if (Str::contains($validator->errors(), 'The player email has already been taken'))  
+                {
+                    $player_account=PlayerAccount::where('player_email', $input['player_email'])->first();
+                    $player=Player::find($player_account->id);
+                    if (is_null($player->player_name))
+                        $player_name='المتسابق رقم '.$player->id;
+                    else
+                        $player_name=$player->player_name;
+                    return $this->SendResponse(['player_name' => $player_name,
+                                                'id' => $player_account->id,
+                                                'player_account' => $player_account], 'Player is retrieved successfully');
+                }  
+                else
+                    return $this->SendError('Validate Error', $validator->errors());                        
             
             $player = Player::create(['player_name' => $input['player_name']]);
             $player->player_account=PlayerAccount::Create(
