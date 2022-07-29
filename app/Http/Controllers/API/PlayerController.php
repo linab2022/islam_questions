@@ -128,7 +128,21 @@ class PlayerController extends BaseController
             if (is_null($player))
                 return $this->SendError('Error','Player of this id is not found'); 
             else  
-                return $this->SendResponse(['player_score' => $player->player_score], 'Player score');   
+            {
+                $pname="";
+                if (is_null($player->player_name))
+                    $pname='المتسابق رقم '.$player->id;
+                else 
+                    $pname = $player->player_name;
+                $rank = DB::table('players')->orderByDesc('player_score')->orderBy('id')->get();
+                $position = $rank->search(function ($p) use ($id) {
+                            return $p->id == $id;
+                });       
+
+                return $this->SendResponse(['player_name'=> $pname,
+                                            'player_score'=> $player->player_score,
+                                            'player_rank'=> $position+1], 'Player score is retrieved successfully'); 
+            }  
         } catch (\Exception $th) {
             return $this->SendError('Error',$th->getMessage());
         }
