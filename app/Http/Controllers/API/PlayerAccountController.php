@@ -73,7 +73,7 @@ class PlayerAccountController extends BaseController
                     $player->save();               
                     return $this->SendResponse(['player_name' => $input['player_name'],
                                                 'id' => $player_account->player_id,
-                                                'player_account' => $player_account], 'Player is retrieved successfully');
+                                                'player_account' => $player_account], 'Player is created successfully');
                 }
                 else
                     return $this->SendError('Error','This Player was registered previously');
