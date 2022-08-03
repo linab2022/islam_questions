@@ -85,9 +85,15 @@ class PlayerController extends BaseController
     public function createNewPlayerWithAccount(Request $request) {
         try {
             $input = $request->all();
+            $p_email=$input['player_email'];
+            $e_type=$input['email_type'];
             $validator = Validator::make($input, [
-                'player_name' => 'required',
-                'player_email' => 'required|unique:player_accounts,player_email| email',
+                'player_name' =>'required',
+                'player_email' => [
+                    'required','email',
+                    Rule::unique('player_accounts')->where(function ($query) use($p_email,$e_type) {
+                    return $query->where('player_email', $p_email)->where('email_type', $e_type);
+                    })],                
                 'email_type' => ['required',Rule::in(['facebook','gmail'])]
             ,]);
 
