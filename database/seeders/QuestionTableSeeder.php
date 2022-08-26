@@ -68,7 +68,7 @@ class QuestionTableSeeder extends Seeder
         DB::table('questions')->insert([
             'question_text' => '4+2',
             "answer1" => "1",
-            "answer2" => "5",
+            "answer2" => "6",
             "answer3" => "3",
             "answer4" => "4",
             "correct_answer" => "2",

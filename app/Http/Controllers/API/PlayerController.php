@@ -54,7 +54,7 @@ class PlayerController extends BaseController
             $player->player_name=$input['player_name'];
             $player->save();
             return $this->SendResponse(['player_name' => $player->player_name], 'Player Name is updated Successfully!');
-        } catch (\Throwable $th) {
+        } catch (\Exception $th) {
             return $this->SendError('Error',$th->getMessage());
         }
     }

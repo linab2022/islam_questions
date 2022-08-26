@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Auth::routes();
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/', [QuestionController::class, 'index'])->name('home');
+//Route::get('/home', [QuestionController::class, 'index'])->name('home');
+Route::post('/store', [QuestionController::class, 'store'])->name('store');
+Route::get('/edit/{id}/{page}', [QuestionController::class, 'edit'])->name('edit');
+Route::post('/update/{id}/{page}', [QuestionController::class, 'update'])->name('update');
+Route::get('/delete/{id}', [QuestionController::class, 'delete'])->name('delete');
